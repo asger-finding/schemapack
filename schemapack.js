@@ -56,6 +56,22 @@ function readVarUInt(buffer) {
   return val;
 }
 
+function readLength(buffer) {
+  var value = readVarUInt(buffer);
+  if (value > buffer.length - bag.byteOffset) {
+    throw new RangeError('schemapack: declared length exceeds buffer');
+  }
+  return value;
+}
+
+function readArrayLength(buffer) {
+  var value = readVarUInt(buffer);
+  if (value > buffer.length) {
+    throw new RangeError('schemapack: declared length exceeds buffer');
+  }
+  return value;
+}
+
 function readVarInt(buffer) {
   var val = readVarUInt(buffer);
   return (val >>> 1) ^ -(val & 1);
@@ -68,7 +84,7 @@ function writeString(val, wBuffer) {
 }
 
 function readString(buffer) {
-  var len = readVarUInt(buffer);
+  var len = readLength(buffer);
   var str = buffer.toString(strEnc, bag.byteOffset, bag.byteOffset + len);
   bag.byteOffset += len;
   return str;
@@ -82,7 +98,7 @@ function writeBuffer(val, wBuffer) {
 }
 
 function readBuffer(buffer) {
-  var len = readVarUInt(buffer);
+  var len = readLength(buffer);
   var buff = allocUnsafe(len);
   buffer.copy(buff, 0, bag.byteOffset, bag.byteOffset + len);
   bag.byteOffset += len;
@@ -158,6 +174,8 @@ bag.allocUnsafe = allocUnsafe;
 bag.getVarUIntByteLength = getVarUIntByteLength;
 bag.dynamicByteCounts = dynamicByteCounts;
 bag.readVarUInt = readVarUInt;
+bag.readLength = readLength;
+bag.readArrayLength = readArrayLength;
 bag.readVarInt = readVarInt;
 bag.writeVarUInt = writeVarUInt;
 bag.writeVarInt = writeVarInt;
@@ -185,7 +203,7 @@ function encodeArrayLength(id) {
 }
 
 function decodeArrayLength(arrLenStr) {
-  return "var " + arrLenStr + "=bag.readVarUInt(buffer);";
+  return "var " + arrLenStr + "=bag.readArrayLength(buffer);";
 }
 
 function declareDecodeRef(id, parentID, prop, container) {

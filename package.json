@@ -1,6 +1,6 @@
 {
-  "name": "schemapack",
-  "version": "1.4.2",
+  "name": "@asger-finding/schemapack",
+  "version": "1.4.3",
   "description": "The fastest and smallest JavaScript object serialization library. Efficiently encode your objects in to compact byte buffers and then decode them back in to objects on the receiver. Integrates very well with WebSockets.",
   "main": "schemapack.js",
   "engines": {
@@ -12,7 +12,7 @@
   "tonicExampleFilename": "tonic.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/phretaddin/schemapack.git"
+    "url": "git+https://github.com/asger-finding/schemapack.git"
   },
   "keywords": [
     "schema",
@@ -30,13 +30,13 @@
   "author": "phretaddin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/phretaddin/schemapack/issues"
+    "url": "https://github.com/asger-finding/schemapack/issues"
   },
   "files": [
     "schemapack.js",
     "tonic.js"
   ],
-  "homepage": "https://github.com/phretaddin/schemapack#readme",
+  "homepage": "https://github.com/asger-finding/schemapack#readme",
   "devDependencies": {
     "ava": "*",
     "benchmark": "*",
