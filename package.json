@@ -1,15 +1,29 @@
 {
   "name": "@asger-finding/schemapack",
-  "version": "1.4.3",
+  "version": "2.0.0",
   "description": "The fastest and smallest JavaScript object serialization library. Efficiently encode your objects in to compact byte buffers and then decode them back in to objects on the receiver. Integrates very well with WebSockets.",
-  "main": "schemapack.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/schemapack.d.ts",
+      "default": "./dist/schemapack.js"
+    }
+  },
+  "unpkg": "./dist/schemapack.min.js",
+  "jsdelivr": "./dist/schemapack.min.js",
+  "files": [
+    "dist"
+  ],
   "engines": {
-    "node": ">=0.11.15"
+    "node": ">=22.13"
   },
   "scripts": {
-    "test": "ava"
+    "build": "tsc -p tsconfig.build.json && esbuild src/browser.ts --bundle --minify --format=iife --outfile=dist/schemapack.min.js",
+    "prepare": "npm run build",
+    "lint": "eslint --flag unstable_native_nodejs_ts_config .",
+    "test": "npm run build && tsc && node --test \"test/*.test.ts\"",
+    "bench": "node bench/bench.ts player && node bench/bench.ts state && node bench/bench.ts delta"
   },
-  "tonicExampleFilename": "tonic.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/asger-finding/schemapack.git"
@@ -27,21 +41,28 @@
     "arraybuffer",
     "net"
   ],
-  "author": "phretaddin",
+  "author": "Asger Finding",
+  "contributors": [
+    "phretaddin"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/asger-finding/schemapack/issues"
   },
-  "files": [
-    "schemapack.js",
-    "tonic.js"
-  ],
   "homepage": "https://github.com/asger-finding/schemapack#readme",
   "devDependencies": {
-    "ava": "*",
-    "benchmark": "*",
-    "msgpack-lite": "*",
-    "protobufjs": "*",
-    "lz-string": "*"
+    "@eslint/js": "^10.0.1",
+    "@msgpack/msgpack": "^3.1.3",
+    "@types/node": "^26.6.4",
+    "avsc": "^5.7.9",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.12.0",
+    "mitata": "^1.0.34",
+    "msgpackr": "^2.1.0",
+    "protobufjs": "^8.8.0",
+    "roughjs": "^4.6.6",
+    "schemapack": "^1.4.2",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.71.1"
   }
 }

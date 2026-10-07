@@ -1,0 +1,13 @@
+export const schema = {
+  b: "buffer",
+  c: "buffer",
+  a: "buffer",
+  d: "buffer"
+};
+
+export const items = [{
+  b: new Uint8Array([0x01, 0x02, 0x03, 0x04]),
+  c: new Uint8Array([0x05, 0x06, 0x07, 0x08]),
+  a: new Uint8Array([0x09, 0x0A, 0x0B, 0x0C]),
+  d: new Uint8Array([0x0D, 0x0E, 0x0F, 0x10])
+}];
