@@ -1,6 +1,6 @@
 {
   "name": "@asger-finding/schemapack",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "The fastest and smallest JavaScript object serialization library. Efficiently encode your objects in to compact byte buffers and then decode them back in to objects on the receiver. Integrates very well with WebSockets.",
   "type": "module",
   "exports": {
